@@ -233,10 +233,14 @@ typedef void (^MXProgressBlock) (CGFloat progress);
 
 @end
 
+@class MXScrollView;
+
 /**
  MXSegmentedPager with parallax header. This category uses [MXParallaxHeader](http://cocoadocs.org/docsets/MXParallaxHeader) to set up a parallax header on top of a segmented-pager.
  */
 @interface MXSegmentedPager (ParallaxHeader)
+
+@property (nonatomic, strong) MXScrollView *contentView;
 
 /**
  The parallax header. cf. [MXParallaxHeader](http://cocoadocs.org/docsets/MXParallaxHeader) for more details.
