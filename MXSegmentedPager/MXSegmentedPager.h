@@ -184,6 +184,8 @@ typedef NS_ENUM(NSInteger, MXSegmentedControlPosition) {
  */
 @interface MXSegmentedPager : UIView
 
+@property (nonatomic, strong) MXScrollView *contentView;
+
 /**
  Delegate instance that adopt the MXSegmentedPagerDelegate.
  */
@@ -233,7 +235,6 @@ typedef NS_ENUM(NSInteger, MXSegmentedControlPosition) {
  */
 @interface MXSegmentedPager (ParallaxHeader)
 
-@property (nonatomic, strong) MXScrollView *contentView;
 
 /**
  The parallax header. cf. [MXParallaxHeader](http://cocoadocs.org/docsets/MXParallaxHeader) for more details.
