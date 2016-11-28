@@ -182,6 +182,7 @@ typedef NS_ENUM(NSInteger, MXSegmentedControlPosition) {
 /**
  You use the MXSegmentedPager class to create and manage segmented pages. A segmented pager displays a horizontal segmented control on top of pages, each segment corresponds to a page in the MXSegmentedPager view.The currently viewed page is indicated by the segmented control.
  */
+@class MXScrollView;
 @interface MXSegmentedPager : UIView
 
 @property (nonatomic, strong) MXScrollView *contentView;
