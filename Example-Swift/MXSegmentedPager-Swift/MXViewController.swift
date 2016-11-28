@@ -27,21 +27,21 @@ class MXViewController: MXSegmentedPagerController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.segmentedPager.backgroundColor = UIColor.whiteColor()
+        segmentedPager.backgroundColor = UIColor.white
         
         // Parallax Header       
-        self.segmentedPager.parallaxHeader.view = MXHeaderView.instanceFromNib();
-        self.segmentedPager.parallaxHeader.mode = MXParallaxHeaderMode.Fill;
-        self.segmentedPager.parallaxHeader.height = 150;
-        self.segmentedPager.parallaxHeader.minimumHeight = 20;
+        segmentedPager.parallaxHeader.view = MXHeaderView.instanceFromNib();
+        segmentedPager.parallaxHeader.mode = MXParallaxHeaderMode.fill;
+        segmentedPager.parallaxHeader.height = 150;
+        segmentedPager.parallaxHeader.minimumHeight = 20;
         
         // Segmented Control customization
-        self.segmentedPager.segmentedControl.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown;
-        self.segmentedPager.segmentedControl.backgroundColor = UIColor.whiteColor()
-        self.segmentedPager.segmentedControl.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.blackColor()];
-        self.segmentedPager.segmentedControl.selectedTitleTextAttributes = [NSForegroundColorAttributeName : UIColor.orangeColor()]
-        self.segmentedPager.segmentedControl.selectionStyle = HMSegmentedControlSelectionStyleFullWidthStripe
-        self.segmentedPager.segmentedControl.selectionIndicatorColor = UIColor.orangeColor()
+        segmentedPager.segmentedControl.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocation.down;
+        segmentedPager.segmentedControl.backgroundColor = UIColor.white
+        segmentedPager.segmentedControl.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.black];
+        segmentedPager.segmentedControl.selectedTitleTextAttributes = [NSForegroundColorAttributeName : UIColor.orange]
+        segmentedPager.segmentedControl.selectionStyle = HMSegmentedControlSelectionStyle.fullWidthStripe
+        segmentedPager.segmentedControl.selectionIndicatorColor = UIColor.orange
     }
 
     override func didReceiveMemoryWarning() {
@@ -49,11 +49,11 @@ class MXViewController: MXSegmentedPagerController {
         // Dispose of any resources that can be recreated.
     }
     
-    override func segmentedPager(segmentedPager: MXSegmentedPager, titleForSectionAtIndex index: Int) -> String {
+    override func segmentedPager(_ segmentedPager: MXSegmentedPager, titleForSectionAt index: Int) -> String {
         return ["Table", "Web", "Text"][index];
     }
     
-    override func segmentedPager(segmentedPager: MXSegmentedPager, didScrollWithParallaxHeader parallaxHeader: MXParallaxHeader) {
+    override func segmentedPager(_ segmentedPager: MXSegmentedPager, didScrollWith parallaxHeader: MXParallaxHeader) {
         NSLog("progress %f", parallaxHeader.progress)
     }
 }

@@ -44,6 +44,7 @@
     
     // Parallax Header
     self.segmentedPager.parallaxHeader.view = self.cover;
+    self.segmentedPager.parallaxHeader.delegate = self.cover;
     self.segmentedPager.parallaxHeader.mode = MXParallaxHeaderModeFill;
     self.segmentedPager.parallaxHeader.height = 150;
     self.segmentedPager.parallaxHeader.minimumHeight = 20;
@@ -57,17 +58,6 @@
     self.segmentedPager.segmentedControl.selectionIndicatorColor = [UIColor orangeColor];
     
     self.segmentedPager.segmentedControlEdgeInsets = UIEdgeInsetsMake(12, 12, 12, 12);
-    
-/*
-    //VGParallaxHeader backward compatibility
-    UILabel *stickyLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-    stickyLabel.backgroundColor = [UIColor colorWithRed:1 green:0.749 blue:0.976 alpha:1];
-    stickyLabel.textAlignment = NSTextAlignmentCenter;
-    stickyLabel.text = @"Say hello to Sticky View :)";
-    
-    self.segmentedPager.parallaxHeader.stickyViewPosition = VGParallaxHeaderStickyViewPositionBottom;
-    [self.segmentedPager.parallaxHeader setStickyView:stickyLabel withHeight:40];
- */
 }
 
 - (void)viewWillLayoutSubviews {
@@ -149,22 +139,6 @@
     NSLog(@"%@ page selected.", title);
 }
 
-- (void)segmentedPager:(MXSegmentedPager *)segmentedPager didScrollWithParallaxHeader:(MXParallaxHeader *)parallaxHeader {
-    
-    // Use the refresh control only on WebView
-    if (segmentedPager.pager.selectedPage == self.webView) {
-        
-        // progress > 1 means 'pulled down'
-        if (parallaxHeader.progress > 1) {
-            self.cover.indeterminate = YES;
-            [self.webView reload];
-        }
-        else {
-            self.cover.progress = parallaxHeader.progress;
-        }
-    }
-}
-
 #pragma mark <MXSegmentedPagerDataSource>
 
 - (NSInteger)numberOfPagesInSegmentedPager:(MXSegmentedPager *)segmentedPager {
@@ -208,8 +182,7 @@
 #pragma mark <UIWebViewDelegate>
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
-    // Remove Refresh Controll when the web view did load
-    self.cover.indeterminate = NO;
+
 }
 
 @end
