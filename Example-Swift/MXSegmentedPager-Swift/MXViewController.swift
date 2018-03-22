@@ -35,6 +35,12 @@ class MXViewController: MXSegmentedPagerController {
         segmentedPager.parallaxHeader.height = 150;
         segmentedPager.parallaxHeader.minimumHeight = 20;
         
+        //segmentedPager.segmentedControlEdgeInsets = UIEdgeInsetsMake(118, 0, 0, 0);
+        let accessoryView = UIView()
+        accessoryView.frame = CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: 118)
+        accessoryView.backgroundColor = UIColor.red
+        segmentedPager.accessoryView = accessoryView
+        
         // Segmented Control customization
         segmentedPager.segmentedControl.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocation.down;
         segmentedPager.segmentedControl.backgroundColor = UIColor.white

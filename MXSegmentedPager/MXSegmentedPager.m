@@ -42,6 +42,7 @@
     
     //Gets the segmented control height
     _controlHeight = 44.f;
+    
     if ([self.delegate respondsToSelector:@selector(heightForSegmentedControlInSegmentedPager:)]) {
         _controlHeight = [self.delegate heightForSegmentedControlInSegmentedPager:self];
     }
@@ -87,6 +88,14 @@
                           animated:animated];
 }
 
+- (void)setAccessoryView:(UIView *)accessoryView {
+    if (!_accessoryView) {
+        _accessoryView = accessoryView;
+        [self.contentView addSubview:_accessoryView];
+        [self setNeedsLayout];
+    }
+}
+
 #pragma mark Layout
 
 - (void)layoutSubviews {
@@ -99,6 +108,7 @@
     [self layoutContentView];
     [self layoutSegmentedControl];
     [self layoutPager];
+    [self layoutAccessoryView];
 }
 
 - (void)layoutContentView {
@@ -118,6 +128,9 @@
     
     if (self.segmentedControlPosition == MXSegmentedControlPositionTop) {
         frame.origin.y = self.segmentedControlEdgeInsets.top;
+        if (self.accessoryView.bounds.size.height > 0) {
+            frame.origin.y += self.accessoryView.bounds.size.height;
+        }
     } else {
         frame.origin.y  = frame.size.height;
         frame.origin.y -= _controlHeight;
@@ -131,6 +144,18 @@
     self.segmentedControl.frame = frame;
 }
 
+-(void)layoutAccessoryView {
+    CGRect frame = self.accessoryView.bounds;
+    
+    frame.origin.x = self.segmentedControlEdgeInsets.left;
+    
+    frame.size.width = self.bounds.size.width;
+    frame.size.width -= self.segmentedControlEdgeInsets.left;
+    frame.size.width -= self.segmentedControlEdgeInsets.right;
+    
+    self.accessoryView.frame = frame;
+}
+
 - (void)layoutPager {
     CGRect frame = self.bounds;
     
@@ -139,11 +164,13 @@
     if (self.segmentedControlPosition == MXSegmentedControlPositionTop) {
         frame.origin.y  = _controlHeight;
         frame.origin.y += self.segmentedControlEdgeInsets.top;
+        frame.origin.y += self.accessoryView.bounds.size.height;
         frame.origin.y += self.segmentedControlEdgeInsets.bottom;
     }
     
     frame.size.height -= _controlHeight;
     frame.size.height -= self.segmentedControlEdgeInsets.top;
+    frame.size.height -= self.accessoryView.bounds.size.height;
     frame.size.height -= self.segmentedControlEdgeInsets.bottom;
     frame.size.height -= self.contentView.parallaxHeader.minimumHeight;
     
